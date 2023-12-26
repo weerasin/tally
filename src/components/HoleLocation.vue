@@ -1,12 +1,23 @@
 <script setup>
-const imageUrl = new URL('/src/assets/img/Windyke_East_1.png', import.meta.url)
+import { useCourseStore } from '@/stores/courseInfo'
+import { computed} from 'vue'
+
+  const courseStore = useCourseStore()
+
+  const imageUrl = computed(() => {
+    let prefix = courseStore.courseName.replace(/\s/g, '_')
+    let imgFullName = `${prefix}_${courseStore.holeNumber}.png`
+    return new URL(`/src/assets/img/${imgFullName}`, import.meta.url)
+  })
+
+// const imageUrl = new URL('/src/assets/img/Windyke_East_2.png', import.meta.url)
 </script>
 
 
 <template>
   <section>
     <div class="greeninfo">
-      <img class="greenimg" :src="`${imageUrl}`" alt="Windyke East Hole 1" />
+      <img class="greenimg" :src="`${imageUrl}`" :alt="`${courseStore.courseName } ${courseStore.holeNumber}`" />
       <span>Today's Hole location: <strong>2</strong></span>
     </div>
   </section>
@@ -22,5 +33,7 @@ const imageUrl = new URL('/src/assets/img/Windyke_East_1.png', import.meta.url)
 .greenimg {
   width: 90px;
   height: 90px;
+  background-color: #dee1aa;
+  border-radius: 25%;
 }
 </style>

@@ -21,12 +21,10 @@ export const useCourseStore = defineStore('courseInfo', () => {
   })
 
   function nextHole() {
-    // console.log("Incrementign hole number")
     if (holeNumber.value < 18) holeNumber.value++
   }
 
   function prevHole() {
-    // console.log("Deccrementign hole number")
     if (holeNumber.value > 1) holeNumber.value--
   }
 
